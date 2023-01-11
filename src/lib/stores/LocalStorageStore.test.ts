@@ -15,6 +15,7 @@ beforeEach(async () => {
 })
 
 test('can open when local storage is empty', () => {
+    localStorage.removeItem("index");
     expect(store.open()).toBe(true);
 })
 
