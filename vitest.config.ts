@@ -15,10 +15,11 @@ export default defineConfig({
     // in-source testing
     includeSource: ['src/**/*.{js,ts,svelte}'],
     // Add @testing-library/jest-dom matchers & mocks of SvelteKit modules
-    setupFiles: ['./setupTest.ts'],
+    setupFiles: ['./setupTest.ts', 'vitest-localstorage-mock'],
     // Exclude files in c8
     coverage: {
-      exclude: ['setupTest.ts']
+      exclude: ['setupTest.ts'],
+      reporter: ['text', 'json-summary', 'json'],
     },
     // Exclude playwright tests folder
     exclude: [...configDefaults.exclude, 'tests', 'tests-examples']

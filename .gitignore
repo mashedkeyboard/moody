@@ -13,6 +13,5 @@ vite.config.ts.timestamp-*
 /test-results/
 /playwright-report/
 /playwright/.cache/
-/test-results/
-/playwright-report/
-/playwright/.cache/
+.nvm-node
+tests-examples/
