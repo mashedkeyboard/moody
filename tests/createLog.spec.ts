@@ -13,7 +13,7 @@ test.beforeEach(async ({page}) => {
 
 test('can click mood to get log page', async ({ page }) => {
     const mood = page.getByText("😭");
-    expect(mood).toBeVisible();
+    await expect(mood).toBeVisible();
     await mood.click();
     await expect(page.getByRole("heading", {level: 1})).toHaveText("What's got you feeling 😭?");
 });
