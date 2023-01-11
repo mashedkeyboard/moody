@@ -11,7 +11,8 @@
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
     "format": "prettier --plugin-search-dir . --write .",
     "test-ct": "playwright test -c playwright-ct.config.ts",
-    "nvm": "~/.nvm/nvm-exec which node | xargs -I % ln -sf % ./.nvm-node && chmod +x ./.nvm-node"
+    "nvm": "~/.nvm/nvm-exec which node | xargs -I % ln -sf % ./.nvm-node && chmod +x ./.nvm-node",
+    "vitest": "vitest"
   },
   "devDependencies": {
     "@fontsource/fira-mono": "^4.5.10",
