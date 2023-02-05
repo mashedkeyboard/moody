@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Mood } from "../models/Mood";
     import {moods} from "$lib/MoodLibrary";
+    import Button from "$lib/components/Button.svelte";
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -10,8 +11,17 @@
     }
 </script>
 
-<div class="flex flex-wrap justify-center align-center p-10 gap-3">
+<div>
     {#each moods as mood}
-    <button class="btn btn-circle btn-lg text-4xl" on:click={e => selectMood(mood)}>{mood.icon}</button>
+    <Button className="round large" on:click={e => selectMood(mood)}>{mood.icon}</Button>
     {/each}
 </div>
+
+<style lang="scss">
+    div {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+</style>

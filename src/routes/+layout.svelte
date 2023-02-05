@@ -1,9 +1,11 @@
 <script>
-	import "../app.postcss";
+	import "../app.scss";
     import './styles.css';
+	import Header from './Header.svelte';
 </script>
 
 <div class="app">
+	<Header/>
 	<main>
 		<slot></slot>
 	</main>
