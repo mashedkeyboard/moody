@@ -1,0 +1,10 @@
+{
+    "vitest.exclude": [
+        
+        "/tests/**", // these are Playwright
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/cypress/**",
+        "**/.{idea,git,cache,output,temp}/**"
+    ]
+}

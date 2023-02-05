@@ -26,7 +26,7 @@ describe('MoodSelector.svelte', () => {
       await fireEvent.click(btn);
 
       expect(moodSelectedEvent).toHaveBeenCalled();
-      expect(moodSelected).toBe(mood);
+      expect(moodSelected!).toBe(mood);
     })
   })
 })

@@ -1,9 +1,10 @@
 <script lang="ts">
     export let type: "button" | "submit" = "button";
     export let className = "";
+    export let data = {};
 </script>
 
-<button on:click class={className} {type}>
+<button on:click class={className} {type} {...data}>
     <slot></slot>
 </button>
 

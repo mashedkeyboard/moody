@@ -1,18 +1,25 @@
 <script lang="ts">
 	import { activeStore } from '$lib/components/stores/ActiveStore';
     import Button from '$lib/components/Button.svelte';
+	import type { MoodLog } from '$lib/models/MoodLog';
 
     let moodLogs = $activeStore.list();
+
+    function deleteLog(log: MoodLog) {
+        if (confirm("Are you sure you want to delete " + log.datetime.toLocaleString("en-GB", {weekday: 'long'}) +"'s mood?")) {
+            $activeStore.delete(log);
+        }
+    }
 </script>
 
 <h1>Mood history</h1>
 <div class="moodList">
-	{#each Object.keys(moodLogs) as moodYear}
+	{#each Object.keys($moodLogs) as moodYear}
 		<h2 class="divider heavy">{moodYear}</h2>
-        {#each Object.keys(moodLogs[moodYear]).sort(function(a, b){return parseInt(b) - parseInt(a)}) as moodMonth}
-            <h3 class="divider">{moodLogs[moodYear][moodMonth][0].datetime.toLocaleString("en-GB", { month: "long" })}</h3>
+        {#each Object.keys($moodLogs[moodYear]).sort(function(a, b){return parseInt(b) - parseInt(a)}) as moodMonth}
+            <h3 class="divider">{$moodLogs[moodYear][moodMonth][0].datetime.toLocaleString("en-GB", { month: "long" })}</h3>
             <div class="monthMoods">
-                {#each moodLogs[moodYear][moodMonth] as log}
+                {#each $moodLogs[moodYear][moodMonth] as log}
                     <div>
                         <div class="header">
                             <div class="icon">{log.mood.icon}</div>
@@ -20,7 +27,7 @@
                         </div>
                         <p>{log.description}</p>
                         <div>
-                            <Button className="danger small" on:click={() => $activeStore.delete(log)}>Delete</Button>
+                            <Button className="danger small" on:click={() => deleteLog(log)} data={{"data-testid": "delete_" + log.getID()}}>Delete</Button>
                         </div>
                     </div>
                 {/each}
