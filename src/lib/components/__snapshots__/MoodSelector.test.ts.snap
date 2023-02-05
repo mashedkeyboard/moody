@@ -1,3 +1,3 @@
 // Vitest Snapshot v1
 
-exports[`MoodSelector.svelte > mounts 1`] = `"<div><div class=\\"flex flex-wrap justify-center align-center p-10 gap-3\\"><button class=\\"btn btn-circle btn-lg text-4xl\\">😃</button><button class=\\"btn btn-circle btn-lg text-4xl\\">🙂</button><button class=\\"btn btn-circle btn-lg text-4xl\\">😐</button><button class=\\"btn btn-circle btn-lg text-4xl\\">🙁</button><button class=\\"btn btn-circle btn-lg text-4xl\\">😭</button></div></div>"`;
+exports[`MoodSelector.svelte > mounts 1`] = `"<div><div class=\\"svelte-78a4lf\\"><button class=\\"round large svelte-114d4g7\\" type=\\"button\\">😃</button><button class=\\"round large svelte-114d4g7\\" type=\\"button\\">🙂</button><button class=\\"round large svelte-114d4g7\\" type=\\"button\\">😐</button><button class=\\"round large svelte-114d4g7\\" type=\\"button\\">🙁</button><button class=\\"round large svelte-114d4g7\\" type=\\"button\\">😭</button></div></div>"`;
