@@ -2,14 +2,9 @@ import { moods } from '$lib/MoodLibrary';
 import { LocalStorageStore } from '$lib/stores/LocalStorageStore';
 import { Crypt } from '$lib/util/Crypt';
 import { test, expect } from '@playwright/test';
+import fakeLogin from '$tests/support/FakeLogin';
 
-test.beforeEach(async ({page}) => {
-    await page.goto('/');
-
-    const pwdBox = page.getByLabel("Password");
-    await pwdBox.fill("password");
-    await pwdBox.press('Enter');
-});
+test.beforeEach(async ({page}) => await fakeLogin(page));
 
 test('can click mood to get log page', async ({ page }) => {
     const mood = page.getByText("😭");

@@ -3,6 +3,7 @@ import { moods } from '$lib/MoodLibrary';
 import { LocalStorageStore } from '$lib/stores/LocalStorageStore';
 import { Crypt } from '$lib/util/Crypt';
 import { test, expect } from '@playwright/test';
+import fakeLogin from '$tests/support/FakeLogin';
 
 let crypt = new Crypt("password");
 let logWithDesc : MoodLog;
@@ -34,9 +35,7 @@ test.beforeEach(async ({ page }) => {
         localStorage.setItem("index", startingStorage)
     }, startingStorage);
 
-    const pwdBox = page.getByLabel("Password");
-    await pwdBox.fill("password");
-    await pwdBox.press('Enter');
+    await fakeLogin(page);
 
     await page.getByRole("link", {name: "Moods"}).click();
 });
@@ -46,13 +45,13 @@ test('shows mood list title', async ({ page }) => {
 });
 
 test('shows individual moods', async ({ page }) => {
-    expect(await(page.getByRole('heading', { level: 2 }).count())).toBe(2);
+    await expect(page.getByRole('heading', { level: 2 })).toHaveCount(2);
     await expect(page.getByRole('heading', { level: 2 }).first()).toHaveText("2020");
     await expect(page.getByRole('heading', { level: 2 }).last()).toHaveText("2021");
-    expect(await(page.getByRole('heading', { level: 3 })).count()).toBe(2);
+    await expect(page.getByRole('heading', { level: 3 })).toHaveCount(2);
     await expect(page.getByRole('heading', { level: 3 }).first()).toHaveText("December");
     await expect(page.getByRole('heading', { level: 3 }).last()).toHaveText("November");
-    expect(await(page.getByText("test mood description goes in here").count())).toBe(1);
+    await expect(page.getByText("test mood description goes in here")).toHaveCount(1);
 });
 
 test('moods can be deleted', async ({ page }) => {

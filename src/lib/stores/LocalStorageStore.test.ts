@@ -7,7 +7,9 @@ import { get } from 'svelte/store';
 import { LocalStorageStore } from './LocalStorageStore';
 
 let password = "password";
-let store = new LocalStorageStore(password);
+let settings = LocalStorageStore.createSettings();
+settings.set("password", password)
+let store = new LocalStorageStore(settings);
 let crypt = new Crypt(password);
 let testLog = MoodLog.new(moods[0], 'test');
 let testLog2 = MoodLog.new(moods[0], 'test2');

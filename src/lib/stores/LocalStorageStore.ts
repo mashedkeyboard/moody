@@ -1,6 +1,5 @@
 import { DecryptionError } from "$lib/errors/DecryptionError";
 import { NotOpenError } from "$lib/errors/NotOpenError";
-import type { MoodLogStore } from "$lib/interfaces/MoodLogStore";
 import type { MoodLogStoreIndex } from "$lib/interfaces/MoodLogStoreIndex";
 import type { KnownPrecisionDate } from "$lib/models/KnownPrecisionDate";
 import type { MoodLog } from "$lib/models/MoodLog";
@@ -8,20 +7,36 @@ import { Crypt } from "$lib/util/Crypt";
 import { MoodLogSerializer } from "$lib/util/MoodLogSerializer";
 import _ from "lodash";
 import { derived, writable, type Writable } from "svelte/store";
+import { MoodLogStore } from "$lib/stores/MoodLogStore";
+import type { MoodLogStoreSettings } from "$lib/models/MoodLogStoreSettings";
 
 /**
  * LocalStorageStore is a simple MoodLogStore based on the browser's LocalStorage API.
  */
-export class LocalStorageStore implements MoodLogStore {
+export class LocalStorageStore extends MoodLogStore {
     private crypt: Crypt;
     protected _loadedIndex: Writable<MoodLogStoreIndex> | null = null;
 
     /**
      * Creates a new LocalStorageStore for MoodLogs.
-     * @param password a password to use to encrypt the data held in local storage.
+     * @param settings a {@link MoodLogStoreSettings} for this Store based on the config in {@link getSettingsConfig}
      */
-    constructor(password: string) {
-        this.crypt = new Crypt(password);
+    constructor(settings: MoodLogStoreSettings<ReturnType<typeof LocalStorageStore.getSettingsConfig>>) {
+        super(settings);
+        this.crypt = new Crypt(settings.get("password"));
+    }
+
+    static getName() {
+        return "Local storage";
+    }
+
+    static getSettingsConfig() {
+        return {
+            password: {
+                default: "",
+                secure: true
+            }
+        }
     }
 
     open() {
@@ -30,8 +45,13 @@ export class LocalStorageStore implements MoodLogStore {
         if (!index) {
             this._loadedIndex = writable({});
         } else {
-            index = this.crypt.decrypt(index);
-            if (!index) throw new DecryptionError();
+            try {
+                index = this.crypt.decrypt(index);
+            } catch {
+                return false;
+            }
+
+            if (!index) return false;
     
             this._loadedIndex = writable(LocalStorageStore.deserializeIndex(index));
         }
