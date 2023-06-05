@@ -7,19 +7,31 @@
 		<li><a href="/">Home</a></li>
 		{#if $activeStore?.isOpen()}
 		<li><a href="/log">Log</a></li>
-		<li><a href="/moods">Moods</a></li>
+		<!-- <li><a href="/moods">Moods</a></li> -->
+		{/if}
+	</ul>
+	<ul>
+		{#if $activeStore?.isOpen()}
+		<li><a href="/logout">Logout</a></li>
 		{/if}
 	</ul>
 </nav>
 
 <style lang="scss">
-	ul {
-		list-style: none;
+	nav {
 		display: flex;
-		gap: 1em;
+		justify-content: space-between;
 
-		li {
+		ul {
+			list-style: none;
+			gap: 1em;
+			display: inline-flex;
+			font-weight: bold;
+			text-transform: lowercase;
 			font-size: 1.2em;
+			&:last-child {
+				margin-right: 2em;
+			}
 		}
 	}
 </style>

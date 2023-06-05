@@ -37,7 +37,7 @@
         }
 
         &:hover, &:focus {
-            background-color: #fdff84;
+            background-color: #8b8d00;
             cursor: pointer;
             color: #202020;
         }

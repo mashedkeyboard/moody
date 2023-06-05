@@ -4,7 +4,10 @@ import { Crypt } from '$lib/util/Crypt';
 import { test, expect } from '@playwright/test';
 import fakeLogin from '$tests/support/FakeLogin';
 
-test.beforeEach(async ({page}) => await fakeLogin(page));
+test.beforeEach(async ({page}) => {
+    await fakeLogin(page);
+    await page.getByRole('link', { name: 'Log', exact: true }).click();
+});
 
 test('can click mood to get log page', async ({ page }) => {
     const mood = page.getByText("😭");

@@ -1,7 +1,7 @@
-@import '@fontsource/fira-mono';
+@import '@fontsource-variable/maven-pro';
 
 :root {
-	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+	--font-body: 'Maven Pro Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
 	--color-bg-0: rgb(202, 216, 228);
@@ -22,7 +22,6 @@ body {
 	background-attachment: fixed;
 	background-size: 100vw 100vh;
 	background: rgb(32,32,32);
-	background: linear-gradient(90deg, rgba(32,32,32,1) 0%, rgba(64,64,64,1) 20%, rgba(64,64,64,1) 80%, rgba(32,32,32,1) 100%);
 	color: #f2f2f2;
 }
 
@@ -88,4 +87,9 @@ button:focus:not(:focus-visible) {
 	h1 {
 		font-size: 2.4rem;
 	}
+}
+
+button {
+	border: 1px solid #fff;
+	cursor: pointer;
 }

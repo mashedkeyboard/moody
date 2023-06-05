@@ -7,16 +7,16 @@ import { vi } from 'vitest';
 test('has title and provider on login page', async ({ page }) => {
   await page.goto('/login');
 
-  await expect(page.getByRole('heading', {level: 1})).toHaveText("Welcome to moody");
+  await expect(page.getByRole('heading', {level: 1})).toHaveText("Welcome to Moody");
 
-  await expect(page.getByLabel('Provider')).toHaveCount(1);
+  await expect(page.getByText('Local storage')).toHaveCount(1);
   await expect(page.getByLabel('Password')).toHaveCount(0);
 });
 
 test('adds password on provider selection', async ({ page }) => {
   await page.goto('/login');
 
-  page.getByLabel('Provider').selectOption("Local storage");
+  await page.getByText("Local storage").click();
   await expect(page.getByLabel('Password')).toHaveCount(1);
 });
 
@@ -35,7 +35,7 @@ test('defaults to not showing test provider', async ({ page }) => {
 
 test('can create a new empty locally-stored mood vault', async ({ page }) => {
   await fakeLogin(page);
-  await expect(page.getByRole('heading', {level: 1})).toHaveText("How are you feeling today?");
+  await expect(page.getByRole('heading', {level: 1})).toHaveText("Your mood diary");
 });
 
 // test('will go to authenticated pages once authenticated', async ({ page }) => {

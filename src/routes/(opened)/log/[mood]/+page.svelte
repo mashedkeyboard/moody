@@ -10,7 +10,7 @@
 	function submitMood() {
 		$activeStore.save(MoodLog.new(data.mood, moodDescription));
 		alert('Successfully saved');
-		goto('/moods');
+		goto('/');
 	}
 
 	export let data: PageData;
@@ -40,5 +40,12 @@
     textarea {
         width: 100%;
         margin: 1em 0;
+        min-height: 5rem;
+        background: none;
+        border: 1px solid #f2f2f2;
+        color: #ffffff;
+        padding: 1em;
+        font-family: var(--font-body);
+        font-size: 1.1em;
     }
 </style>

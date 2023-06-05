@@ -9,8 +9,6 @@ let crypt = new Crypt("password");
 let logWithDesc : MoodLog;
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-
     logWithDesc = MoodLog.newFromMetadata({
         id: 'test-id-2',
         date: new Date(2021, 10, 5),
@@ -31,17 +29,17 @@ test.beforeEach(async ({ page }) => {
         }
     }));
 
+    await page.goto('/');
+
     await page.evaluate((startingStorage) => {
         localStorage.setItem("index", startingStorage)
     }, startingStorage);
 
     await fakeLogin(page);
-
-    await page.getByRole("link", {name: "Moods"}).click();
 });
 
 test('shows mood list title', async ({ page }) => {
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText("Mood history");
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText("Your mood diary");
 });
 
 test('shows individual moods', async ({ page }) => {
